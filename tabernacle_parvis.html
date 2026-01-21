@@ -1,261 +1,68 @@
-import React, { useState } from 'react';
-import { Info } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Parvis du Tabernacle</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #fdfbf7; margin: 0; padding: 20px; font-family: sans-serif; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 20px; max-width: 800px; margin: auto; }
+        .title { color: #5d4037; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-const TabernacleParvis = () => {
-  const [selectedElement, setSelectedElement] = useState(null);
+    <script type="text/babel">
+        const { useState } = React;
 
-  const elements = {
-    autel: {
-      title: "Autel des Holocaustes",
-      description: "Fait de bois d'acacia recouvert d'airain (bronze). Dimensions: 5 coudées × 5 coudées × 3 coudées de haut. C'est ici que les sacrifices d'animaux étaient offerts, symbolisant l'expiation par le sang.",
-      reference: "Exode 27:1-8",
-      symbolism: "Préfigure le sacrifice de Christ à la croix - le jugement de Dieu sur le péché."
-    },
-    cuve: {
-      title: "Cuve d'Airain (Bassin de Bronze)",
-      description: "Faite de bronze poli provenant des miroirs des femmes d'Israël. Contenait de l'eau pour les ablutions des sacrificateurs avant d'entrer dans le Lieu Saint.",
-      reference: "Exode 30:17-21",
-      symbolism: "Représente la purification par la Parole de Dieu - la sanctification du croyant."
-    },
-    tente: {
-      title: "Le Tabernacle (Tente d'Assignation)",
-      description: "Structure de 30 coudées × 10 coudées × 10 coudées, divisée en deux parties : le Lieu Saint et le Lieu Très Saint (Saint des Saints), séparés par un voile.",
-      reference: "Exode 26",
-      symbolism: "Demeure de Dieu au milieu de son peuple - préfigure Christ 'tabernacling' parmi nous (Jean 1:14)."
-    },
-    parvis: {
-      title: "Le Parvis",
-      description: "Enceinte de 100 coudées × 50 coudées, entourée de toiles de lin blanc suspendues à des colonnes d'airain. Seule entrée : à l'Est.",
-      reference: "Exode 27:9-19",
-      symbolism: "La sainteté de Dieu - séparation d'avec le monde. L'entrée unique à l'Est préfigure Christ, 'la Porte' (Jean 10:9)."
-    },
-    entree: {
-      title: "La Porte du Parvis",
-      description: "Rideau de 20 coudées de large, tissé de fils bleu, pourpre, cramoisi et de fin lin retors. Unique accès au Tabernacle.",
-      reference: "Exode 27:16",
-      symbolism: "Christ est 'la Porte' - le seul chemin vers Dieu (Jean 14:6)."
-    }
-  };
+        const TabernacleParvis = () => {
+            const [selected, setSelected] = useState(null);
 
-  return (
-    <div className="w-full h-screen bg-gradient-to-b from-amber-50 to-stone-100 p-4 overflow-auto">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-amber-900 mb-2">
-          Le Tabernacle du Désert - Vue du Parvis
-        </h1>
-        <p className="text-center text-stone-600 mb-6 italic">
-          "Ils me feront un sanctuaire, et j'habiterai au milieu d'eux" (Exode 25:8)
-        </p>
+            const elements = {
+                autel: { title: "Autel des Holocaustes", desc: "Fait de bois d'acacia recouvert d'airain. Exode 27:1-8.", symb: "Préfigure le sacrifice de Christ à la croix." },
+                cuve: { title: "Cuve d'Airain", desc: "Contenait de l'eau pour les ablutions. Exode 30:17-21.", symb: "Représente la purification par la Parole de Dieu." },
+                porte: { title: "La Porte du Parvis", desc: "Entrée unique à l'Est. Jean 10:9.", symb: "Le Christ est la seule porte d'accès à Dieu." }
+            };
 
-        {/* Schéma principal */}
-        <div className="relative bg-gradient-to-b from-yellow-100 to-amber-100 rounded-lg shadow-2xl p-8 mb-6 border-4 border-amber-800">
-          
-          {/* Le Parvis (enceinte extérieure) */}
-          <svg viewBox="0 0 800 500" className="w-full h-auto">
-            {/* Fond sable du désert */}
-            <rect x="0" y="0" width="800" height="500" fill="#f5deb3" opacity="0.3"/>
-            
-            {/* Enceinte du parvis (toiles blanches) */}
-            <rect 
-              x="50" y="50" width="700" height="400" 
-              fill="none" 
-              stroke="#ffffff" 
-              strokeWidth="8"
-              onClick={() => setSelectedElement(elements.parvis)}
-              className="cursor-pointer hover:stroke-amber-400 transition-all"
-            />
-            
-            {/* Colonnes du parvis (suggérées) */}
-            {[...Array(14)].map((_, i) => (
-              <line 
-                key={`top-${i}`}
-                x1={50 + i * 50} y1="50" 
-                x2={50 + i * 50} y2="70" 
-                stroke="#8B4513" 
-                strokeWidth="3"
-              />
-            ))}
-            {[...Array(14)].map((_, i) => (
-              <line 
-                key={`bottom-${i}`}
-                x1={50 + i * 50} y1="430" 
-                x2={50 + i * 50} y2="450" 
-                stroke="#8B4513" 
-                strokeWidth="3"
-              />
-            ))}
+            return (
+                <div className="card">
+                    <h1 className="title">Le Parvis du Tabernacle</h1>
+                    <svg viewBox="0 0 800 400" className="w-full h-auto border-2 border-amber-900 bg-orange-50 mb-6">
+                        {/* Enceinte du Parvis */}
+                        <rect x="50" y="50" width="700" height="300" fill="none" stroke="#8d6e63" strokeWidth="4" />
+                        {/* Porte à l'Est */}
+                        <line x1="750" y1="150" x2="750" y2="250" stroke="#d32f2f" strokeWidth="8" onClick={() => setSelected(elements.porte)} className="cursor-pointer" />
+                        {/* Autel des Holocaustes */}
+                        <rect x="550" y="160" width="80" height="80" fill="#a1887f" stroke="#5d4037" onClick={() => setSelected(elements.autel)} className="cursor-pointer" />
+                        {/* Cuve d'Airain */}
+                        <circle cx="400" cy="200" r="30" fill="#90caf9" stroke="#1565c0" onClick={() => setSelected(elements.cuve)} className="cursor-pointer" />
+                    </svg>
 
-            {/* Porte du Parvis (à l'Est) */}
-            <rect 
-              x="340" y="50" width="120" height="8" 
-              fill="url(#porteCouleur)"
-              onClick={() => setSelectedElement(elements.entree)}
-              className="cursor-pointer hover:opacity-80 transition-all"
-            />
-            <defs>
-              <linearGradient id="porteCouleur" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style={{stopColor: '#4169E1', stopOpacity: 1}} />
-                <stop offset="33%" style={{stopColor: '#800080', stopOpacity: 1}} />
-                <stop offset="66%" style={{stopColor: '#DC143C', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-              </linearGradient>
-            </defs>
-
-            {/* Autel des Holocaustes */}
-            <rect 
-              x="350" y="120" width="100" height="100" 
-              fill="#CD7F32"
-              stroke="#8B4513"
-              strokeWidth="3"
-              onClick={() => setSelectedElement(elements.autel)}
-              className="cursor-pointer hover:fill-orange-600 transition-all"
-            />
-            <text x="400" y="175" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold">
-              AUTEL
-            </text>
-            {/* Feu sur l'autel */}
-            <polygon 
-              points="380,100 400,80 420,100" 
-              fill="#FF4500"
-              opacity="0.7"
-            />
-            <polygon 
-              points="385,95 400,75 415,95" 
-              fill="#FFD700"
-              opacity="0.8"
-            />
-
-            {/* Cuve d'Airain */}
-            <ellipse 
-              cx="400" cy="280" rx="50" ry="30" 
-              fill="#B87333"
-              stroke="#8B4513"
-              strokeWidth="3"
-              onClick={() => setSelectedElement(elements.cuve)}
-              className="cursor-pointer hover:fill-cyan-700 transition-all"
-            />
-            <ellipse 
-              cx="400" cy="280" rx="40" ry="20" 
-              fill="#87CEEB"
-              opacity="0.6"
-            />
-            <text x="400" y="285" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">
-              CUVE
-            </text>
-
-            {/* Le Tabernacle (structure) */}
-            <g onClick={() => setSelectedElement(elements.tente)} className="cursor-pointer">
-              {/* Base en bois (visible) */}
-              <rect x="250" y="320" width="300" height="100" fill="#8B4513" stroke="#654321" strokeWidth="2"/>
-              
-              {/* Toiles extérieures (peaux de béliers teintes en rouge) */}
-              <path 
-                d="M 250 320 Q 400 280 550 320" 
-                fill="#8B0000" 
-                stroke="#654321" 
-                strokeWidth="2"
-                className="hover:fill-red-800 transition-all"
-              />
-              
-              {/* Couverture supérieure (peaux de dauphins/phoques) */}
-              <path 
-                d="M 240 320 Q 400 270 560 320" 
-                fill="#2F4F4F" 
-                stroke="#1C1C1C" 
-                strokeWidth="2"
-                opacity="0.7"
-              />
-              
-              {/* Entrée du Lieu Saint (voile) */}
-              <rect x="380" y="360" width="40" height="60" fill="url(#voileCouleur)" opacity="0.9"/>
-            </g>
-            
-            <text x="400" y="390" textAnchor="middle" fill="#fff" fontSize="16" fontWeight="bold">
-              TABERNACLE
-            </text>
-
-            {/* Légendes directionnelles */}
-            <text x="400" y="30" textAnchor="middle" fill="#8B4513" fontSize="16" fontWeight="bold">
-              ← OUEST (Lieu Très Saint) | EST (Entrée) →
-            </text>
-            
-          </svg>
-
-          {/* Légende des couleurs */}
-          <div className="mt-4 flex justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-amber-700 border-2 border-amber-900"></div>
-              <span>Bois d'Acacia</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-orange-600 border-2 border-amber-900"></div>
-              <span>Airain (Bronze)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-white border-2 border-gray-400"></div>
-              <span>Lin Blanc</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-red-600"></div>
-              <span>Voiles Colorés</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Panneau d'information */}
-        {selectedElement && (
-          <div className="bg-white rounded-lg shadow-xl p-6 border-l-4 border-amber-600">
-            <div className="flex items-start gap-3 mb-4">
-              <Info className="text-amber-600 flex-shrink-0 mt-1" size={24} />
-              <div className="flex-1">
-                <h2 className="text-2xl font-bold text-amber-900 mb-2">
-                  {selectedElement.title}
-                </h2>
-                <p className="text-gray-700 mb-3 leading-relaxed">
-                  {selectedElement.description}
-                </p>
-                <p className="text-sm text-amber-800 font-semibold mb-2">
-                  📖 Référence : {selectedElement.reference}
-                </p>
-                <div className="bg-amber-50 p-4 rounded border-l-4 border-amber-400">
-                  <p className="text-sm font-semibold text-amber-900 mb-1">Symbolisme Typologique :</p>
-                  <p className="text-sm text-gray-700 italic">
-                    {selectedElement.symbolism}
-                  </p>
+                    <div className="p-4 bg-amber-50 border-l-4 border-amber-700">
+                        {selected ? (
+                            <div>
+                                <h2 className="font-bold text-lg">{selected.title}</h2>
+                                <p className="italic text-gray-700">{selected.desc}</p>
+                                <p className="mt-2 text-amber-900"><strong>Symbolisme :</strong> {selected.symb}</p>
+                            </div>
+                        ) : (
+                            <p className="text-gray-500 italic">Cliquez sur un élément du schéma pour voir les détails bibliques.</p>
+                        )}
+                    </div>
+                    <div className="mt-6 text-center">
+                        <a href="index.html" className="text-sm text-amber-800 underline">Retour à l'accueil</a>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <button 
-              onClick={() => setSelectedElement(null)}
-              className="mt-4 px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors"
-            >
-              Fermer
-            </button>
-          </div>
-        )}
+            );
+        };
 
-        {/* Instructions */}
-        {!selectedElement && (
-          <div className="bg-amber-100 rounded-lg p-4 border border-amber-300">
-            <p className="text-center text-amber-900">
-              <strong>Cliquez sur les éléments du Tabernacle</strong> pour découvrir leur signification biblique et typologique.
-            </p>
-          </div>
-        )}
-
-        {/* Notes importantes */}
-        <div className="mt-6 bg-stone-100 rounded-lg p-4 text-sm text-stone-700">
-          <h3 className="font-bold text-amber-900 mb-2">Notes Importantes :</h3>
-          <ul className="space-y-1 list-disc list-inside">
-            <li><strong>Orientation :</strong> L'entrée est toujours à l'EST (symbolisant Christ, "la Lumière du Monde")</li>
-            <li><strong>Progression :</strong> De l'extérieur vers l'intérieur = chemin du croyant vers la présence de Dieu</li>
-            <li><strong>Matériaux :</strong> Airain (jugement), Argent (rédemption), Or (gloire divine)</li>
-            <li><strong>Coudée :</strong> Environ 45-50 cm (mesure biblique standard)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default TabernacleParvis;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TabernacleParvis />);
+    </script>
+</body>
+</html>
